@@ -2,10 +2,12 @@ package com.example.finalproject;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,8 +16,8 @@ import java.util.Date;
 public class GameDBHandler extends SQLiteOpenHelper {
     //DB Info
     private static final int Database_Version = 1;
-    private static final String Database_Name = "FootballPicker";
-    private static final String Table_Game = "Game";
+    private static final String Database_Name =  Resources.getSystem().getString(R.string.DB_Name);
+    private static final String Table_Game = Resources.getSystem().getString(R.string.Game_Table_Name);
     private static final String Game_Column_ID = "GameID";
     private static final String Game_Column_HomeTeam = "GameHomeTeam";
     private static final String Game_Column_AwayTeam = "GameAwayTeam";
@@ -40,7 +42,7 @@ public class GameDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public String loadHandler(){
+    public String loadGameHandler(){
         String result = "";
         String query = "Select * From " + Table_Game;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -67,7 +69,7 @@ public class GameDBHandler extends SQLiteOpenHelper {
         db.close();
 
     }
-    public Game findHander(int gameID){
+    public Game findGameHandler(int gameID){
         String query = "Select * From " + Table_Game + " Where " + Game_Column_ID + " = " + gameID;
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -95,7 +97,7 @@ public class GameDBHandler extends SQLiteOpenHelper {
         return game;
     }
 
-    public boolean deleteHandler(int gameID){
+    public boolean deleteGameHandler(int gameID){
         boolean result = false;
         String query = "Select * From " + Table_Game + " Where " + Game_Column_ID + " = "  + gameID;
         SQLiteDatabase db = getWritableDatabase();
@@ -111,7 +113,7 @@ public class GameDBHandler extends SQLiteOpenHelper {
         return result;
 
     }
-    public boolean updateHandler(Game game){
+    public boolean updateGameHandler(Game game){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues args = new ContentValues();
         args.put(Game_Column_ID, game.getGameID());
