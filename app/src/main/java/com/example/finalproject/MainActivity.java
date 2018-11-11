@@ -12,15 +12,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO -- see exmample of how to add a game in the addGame function.
+        //TODO -- see example of how to add a game in the addGame function.
         //TODO Tom to update user class to save users -- similar to how game works.
 
 
     }
 
     public void addGame(){
-        GameDBHandler dbHandler = new GameDBHandler(v.getContext(), null, null, 1);
-        ++ID;
+        GameDBHandler dbHandler = new GameDBHandler(this, null, null, 1);
+
+        //I have to figure out how to properly increment ID -- should be unique
+        int ID = 1;
         Game game = new Game();
         game.setGameID(ID);
         game.setHomeTeam("Detroit");
